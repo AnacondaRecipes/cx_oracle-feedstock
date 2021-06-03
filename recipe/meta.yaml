@@ -12,6 +12,7 @@ source:
 
 build:
   number: 0
+  skip: True  #[py<36]
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
@@ -20,13 +21,18 @@ requirements:
   host:
     - pip
     - python
-    - setuptools
+    - setuptools >=40.6.0
+    - wheel
   run:
     - python
 
 test:
   imports:
     - cx_Oracle
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://oracle.github.io/python-cx_Oracle
